@@ -61,7 +61,7 @@
      - **OTP Verification**
         <img src="images/otpVerification.png">
      - **Messages received on Mobile**
-        <img src="images/mobile_messages_1"><img src="images/mobile_messages_2">
+        <img src="images/mobile_messages_1.jpg"><img src="images/mobile_messages_2.jpg">
 8. **References**
     - Google 
     - WhatsApp sources
