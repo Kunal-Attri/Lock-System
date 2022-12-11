@@ -32,6 +32,7 @@
 3. **Run CLI App (Sampling.py)**
 
       - Get Sample image Set of Authorised Users
+     
                 ```
 	        python3 sampling.py
  	        ```
