@@ -21,9 +21,9 @@ class FaceIdentificationModel:
         :param model_path: Path to saved model pickle file
         """
         self.__model = None
-        self.__data_path = data_path if data_path is not None else "FaceDetector/"
+        self.__data_path = data_path if data_path is not None else "Dataset/"
         self.__model_path = model_path if model_path is not None else "model/trained_model.cv2"
-        self.__labels_path = labels_path if labels_path is not None else "FaceDetector/labels.json"
+        self.__labels_path = labels_path if labels_path is not None else "Dataset/labels.json"
         self.__image_files = list()
         self.__labels_file = dict()
         self.__training_data = list()

@@ -9,8 +9,8 @@ from main import Main
 
 NAME = "NoName"
 SAMPLES = 150
-DATA_PATH = "FaceDetector/"
-LABELS_PATH = "FaceDetector/labels.json"
+DATA_PATH = "Dataset/"
+LABELS_PATH = "Dataset/labels.json"
 
 
 def main():

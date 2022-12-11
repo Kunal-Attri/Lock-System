@@ -9,8 +9,8 @@ from lib.TwilioHandler import TwilioHandler
 
 
 MOBILE_NO = "+919605275844"
-DATA_PATH = "FaceDetector/"
-LABELS_PATH = "FaceDetector/labels.json"
+DATA_PATH = "Dataset/"
+LABELS_PATH = "Dataset/labels.json"
 MODEL_PATH = "model/trained_model.cv2"
 PASSCODE = "lock"
 VERIFIED_FLAG = False
