@@ -71,6 +71,7 @@ class Main:
         Script for identified Face
         :param img: Annotated image with face
         """
+        print(f"Hello {self.__name}")
         Main.frame_annotate(img, f"Hello {self.__name}", (0, 255, 0))
 
         time = Main.__get_time()
@@ -86,6 +87,8 @@ class Main:
             sentence = f"Hello {self.__name}, speak your Passphrase!"
         self.__speech.speak(sentence)
         if PASSCODE in self.__speech.listen():
+            print("Passphrase verified!")
+            self.__speech.speak("Passphrase verified!")
             return True
         elif try_flag:
             return self.__handle_speech_recognition("Invalid Passphrase, try again.", try_flag - 1)

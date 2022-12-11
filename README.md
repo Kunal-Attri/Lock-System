@@ -41,7 +41,7 @@
 
        python3 main.py 
       - *Expected Interface*
-           [the box of main.py]
+           <img src="images/main.png">
 <br><br>
 5. **Preparing Data Set** - Internally done
      - The collected data set from `sampling.py` is further formatted for training in `FaceIdentificationModel.py`.
@@ -53,13 +53,13 @@
 
 7. **Working**
      - **Face Detection**
-        [ss of window with yellow square]
+        <img src="images/faceDetection.png">
      - **Face Identification**
-        [ss output of identified face]
-     - **Passcode Verification**
-        [ss output of voice verification]
+        <img src="images/faceIdentification.png">
+     - **Passphrase Verification**
+        <img src="images/passphrase.png">
      - **OTP Verification**
-        [ss of received otp and verified otp]
+        <img src="images/otpVerification.png">
 8. **References**
     - Google 
     - Yahoo!
