@@ -1,0 +1,6 @@
+opencv-python
+opencv-contrib-python
+numpy
+pyttsx3
+SpeechRecognition
+twilio
