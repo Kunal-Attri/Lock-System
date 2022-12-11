@@ -28,5 +28,20 @@
 		```
 		pip3 install -r requirements.txt
  		```
-3. **Run the Program**
-  
+3. **Run CLI App (Sampling.py)**
+        - Get Sample image Set of Authorised Users
+                ```
+		python3 sampling.py
+ 		```
+        - *Expected Interface*
+             [the box with sampling]
+	     
+4. **Run CLI App (main.py)**
+               ```
+	       python3 main.py
+ 	       ```
+         - *Expected Interface*
+            [the box of main.py]
+	   
+5. Training model on the data set collected from Sampling.py
+     
