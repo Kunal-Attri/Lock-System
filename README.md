@@ -41,10 +41,22 @@
        python3 main.py 
       - *Expected Interface*
            [the box of main.py]
-	   
-5. **Training model on the data set collected from `Sampling.py`**
-     - [lot more before this}
-     - The collected dataset from `Sampling.py` will further be trained in `FaceIdentificationModel.py` 
-     - In `FaceIdentificationModel.py`, the function `__train_model` trains the collected Data set and gets the program ready for Face Detection using LBPH (Local Binary Pattern Histogram) Face Reecognition.
-     - 
+5. **Preparing Data Set**
+     - The collected data set from `Sampling.py` is further formatted for training in `FaceIdentificationModel.py`.
+     - Here the Image gets loaded , formatted and grayscaled.
+     - Then it gets passed on to `__build_dataset` where the mathematical Dataset is made.
      
+6. **Training model on the data set collected from `Sampling.py`**
+     - In `FaceIdentificationModel.py`, the function `__train_model` trains the Prepared Data set and gets the program ready for Face Detection using LBPH (Local Binary Pattern Histogram) Face Reecognition.
+
+7. **Working**
+     - **Face Detection**
+        [ss of window with yellow square]
+     - **Face Identification**
+        [ss output of identified face]
+     - **Passcode Verification**
+        [ss output of voice verification]
+     - **OTP Verifiction**
+        [ss of recieved otp and verified otp]
+     
+
