@@ -8,9 +8,9 @@ from SpeechHandler import SpeechHandler
 from TwilioHandler import TwilioHandler
 
 
-NAME = "Kunal"
 MOBILE_NO = "+919605275844"
 DATA_PATH = "FaceDetector/"
+LABELS_PATH = "FaceDetector/labels.json"
 MODEL_PATH = "model/trained_model.cv2"
 PASSCODE = "lock"
 VERIFIED_FLAG = False
@@ -30,9 +30,11 @@ class Main:
         """
         Constructor: Initialization Script
         """
+        self.__name = None
         self.__cap = cv2.VideoCapture(0)
         self.__face_detect = FaceDetectionModel()
-        self.__face_identify = FaceIdentificationModel(data_path=DATA_PATH, model_path=MODEL_PATH)
+        self.__face_identify = FaceIdentificationModel(data_path=DATA_PATH, model_path=MODEL_PATH,
+                                                       labels_path=LABELS_PATH)
         self.__speech = SpeechHandler()
         self.__verifier = TwilioHandler(mobile_no=MOBILE_NO)
 
@@ -48,7 +50,8 @@ class Main:
         if not len(face):
             return Main.frame_annotate(image, "Face not Found", color=(255, 0, 0))
 
-        if not self.__face_identify.identify(face):
+        self.__name, identified = self.__face_identify.identify(face)
+        if not identified:
             return Main.frame_annotate(image, "CANT RECOGNISE", color=(0, 0, 255))
 
         self.__handle_identified_face(image)
@@ -61,16 +64,19 @@ class Main:
         Script for identified Face
         :param img: Annotated image with face
         """
-        Main.frame_annotate(img, f"Hello {NAME}", (0, 255, 0))
+        Main.frame_annotate(img, f"Hello {self.__name}", (0, 255, 0))
 
         time = datetime.now().strftime('%I:%M %p')
         self.__speech.speak("Face verified at " + time)
 
-    def __handle_speech_recognition(self, sentence: str = f"Hello {NAME}, speak your Passcode!", try_flag: int = 1) -> bool:
+    def __handle_speech_recognition(self, sentence: str = None, try_flag: int = 1) \
+            -> bool:
         """
         Script for Speech Recognition
         :param sentence: Initial sentence to be spoken
         """
+        if sentence is None:
+            sentence = f"Hello {self.__name}, speak your Passcode!"
         self.__speech.speak(sentence)
         if PASSCODE in self.__speech.listen():
             return True
