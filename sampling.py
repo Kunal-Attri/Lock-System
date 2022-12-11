@@ -4,7 +4,7 @@ import os.path
 import cv2
 import uuid
 
-from FaceDetectionModel import FaceDetectionModel
+from lib.FaceDetectionModel import FaceDetectionModel
 from main import Main
 
 NAME = "NoName"

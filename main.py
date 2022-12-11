@@ -2,10 +2,10 @@ import cv2
 from datetime import datetime
 from numpy import ndarray
 
-from FaceDetectionModel import FaceDetectionModel
-from FaceIdentificationModel import FaceIdentificationModel
-from SpeechHandler import SpeechHandler
-from TwilioHandler import TwilioHandler
+from lib.FaceDetectionModel import FaceDetectionModel
+from lib.FaceIdentificationModel import FaceIdentificationModel
+from lib.SpeechHandler import SpeechHandler
+from lib.TwilioHandler import TwilioHandler
 
 
 MOBILE_NO = "+919605275844"
