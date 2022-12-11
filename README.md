@@ -1,4 +1,9 @@
-# Face Authenticator With OTP
+# Lock System with Multi-factor Authentication
+Multi-factor Authentication refers to multiple levels and states of authentication for verification purpose. This
+project tries to utilize that aspect through the use of Face Authentication, Speech Authentication and OTP Verification
+for a lock based system. This can be further extended to utilize these capacities in other forms of Verification based
+systems.
+
 ## Requirements (installable via pip)
 - [opencv-python](https://pypi.org/project/opencv-python/)
 - [opencv-contrib-python](https://pypi.org/project/opencv-contrib-python/)
@@ -9,11 +14,18 @@
 - [PyAudio](https://pypi.org/project/PyAudio/)
 
 ## What we used?
-- [SpeechRecognition](https://www.geeksforgeeks.org/speech-recognition-in-python-using-google-speech-api/) - for verifying passcode - SpeechRecognition is a python library which we used to verify our passcode. The passcode is to be said by the user to proceed to the OTP verification Phase.
-- [OpenCV](https://opencv.org/) - for Face Detection and Identification - OpenCV is a python library which we used to detect the face of the user using LBPH face recognition. Then it is further processed via our FaceIdentification model.
-- [pyttsx3](https://pyttsx3.readthedocs.io/en/latest/) - for Speaking Text outputs - Python Text to Speech is a python library to convert text to speech form. We have used it make it convenient for end user to interact with the application.
-- [Twilio](https://www.twilio.com/) - for Sending OTP & alert Messages - Twilio is a communications API for SMS, voice, video, WhatsApp messaging and email. We used this API to send and verify OTP by both as a web client and in the program itself.
-- [json](https://docs.python.org/3/library/json.html) - for Dataset management - JSON library is used to interact with json files. We have used it to manage our dataset labels.
+- [SpeechRecognition](https://www.geeksforgeeks.org/speech-recognition-in-python-using-google-speech-api/) - for 
+verifying passcode - SpeechRecognition is a python library which we used to verify our passcode. The passcode is to be 
+said by the user to proceed to the OTP verification Phase.
+- [OpenCV](https://opencv.org/) - for Face Detection and Identification - OpenCV is a python library which we used to 
+detect the face of the user using LBPH face recognition. Then it is further processed via our FaceIdentification model.
+- [pyttsx3](https://pyttsx3.readthedocs.io/en/latest/) - for Speaking Text outputs - Python Text to Speech is a python 
+library to convert text to speech form. We have used it make it convenient for end user to interact with the application.
+- [Twilio](https://www.twilio.com/) - for Sending OTP & alert Messages - Twilio is a communications API for SMS, voice, 
+video, WhatsApp messaging and email. We used this API to send and verify OTP by both as a web client and in the program 
+itself.
+- [json](https://docs.python.org/3/library/json.html) - for Dataset management - JSON library is used to interact with 
+json files. We have used it to manage our dataset labels.
 
 ## How to run the program
 1. **Download this GitHub repository**
@@ -30,7 +42,7 @@
 		```
 		pip3 install -r requirements.txt
  		```
-3. **Run CLI App `Sampling.py`**
+3. **Run Sampling App `Sampling.py`**
       - Form dataset of your face images
                
 	        python3 sampling.py
@@ -68,7 +80,10 @@
         <br>
         <img src="images/mobile_messages_1.jpg" width=350><img src="images/mobile_messages_2.jpg" width=350>
 8. **References**
-    - Google 
-    - WhatsApp sources
-    - Your Dog
+    - [Google Speech Recognition API](https://www.geeksforgeeks.org/speech-recognition-in-python-using-google-speech-api/) 
+    - [LBPH Face Recognition](https://towardsdatascience.com/face-recognition-how-lbph-works-90ec258c3d6b)
+    - [Twilio SMS](https://www.twilio.com/docs/sms)
+    - [Twilio OTP Verification](https://www.twilio.com/code-exchange/one-time-passcode-verification-otp)
+    - [pyttsx3 Engines](https://pyttsx3.readthedocs.io/en/latest/engine.html#examples)
+    - [Your Black Dog](https://en.wikipedia.org/wiki/Black_Dog_Scotch_Whisky)
 
