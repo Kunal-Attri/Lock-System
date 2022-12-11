@@ -42,7 +42,7 @@
       - *Expected Interface*
            [the box of main.py]
 	   
-5. Training model on the data set collected from Sampling.py
+5. **Training model on the data set collected from `Sampling.py`**
      - The collected dataset from `Sampling.py` will further be trained in `FaceIdentificationModel.py` 
      - In `FaceIdentificationModel.py`, the function `__train_model` trains the collected Data set and gets the program ready for Face Detection using LBPH (Local Binary Pattern Histogram) Face Reecognition.
      - 
