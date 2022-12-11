@@ -33,8 +33,7 @@
 
       - Get Sample image Set of Authorised Users
      
-                ```
-	        python3 sampling.py
+                ```python3 sampling.py
  	        ```
 		
       - *Expected Interface*
@@ -43,8 +42,7 @@
 	     
 4. **Run CLI App (main.py)**
 
-              ```
-	      python3 main.py
+              ```python3 main.py
  	      ```
 	      
       - *Expected Interface*
