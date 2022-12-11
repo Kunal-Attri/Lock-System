@@ -32,20 +32,16 @@
 3. **Run CLI App (Sampling.py)**
 
       - Get Sample image Set of Authorised Users
-     
-                ```
+               
 	        python3 sampling.py
- 	        ```
-		
+ 	      
       - *Expected Interface*
             [the box with sampling]
 
 	     
 4. **Run CLI App (main.py)**
 
-              ```python3 main.py
- 	      ```
-	      
+       python3 main.py 
       - *Expected Interface*
            [the box of main.py]
 	   
