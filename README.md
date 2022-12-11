@@ -60,14 +60,10 @@
         <img src="images/passphrase.png">
      - **OTP Verification**
         <img src="images/otpVerification.png">
+     - **Messages received on Mobile**
+        <img src="images/mobile_messages_1"><img src="images/mobile_messages_2">
 8. **References**
     - Google 
-    - Yahoo!
-    - Twitter
-    - Instagram
-    - Facebook
-    - Snapchat
-    - Signal
-    - WhatsApp
+    - WhatsApp sources
     - Your Dog
 
