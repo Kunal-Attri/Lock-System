@@ -6,12 +6,14 @@
 - [pyttsx3](https://pypi.org/project/pyttsx3/)
 - [SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
 - [twilio](https://pypi.org/project/twilio/)
+- [PyAudio](https://pypi.org/project/PyAudio/)
 
 ## What we used?
-- [Twilio](https://www.twilio.com/) - for sending OTP - Twilio is a communications API for SMS, voice, video, WhatsApp messaging and email. We used this API to send and verfiy OTP by both as a web client and in the program itself.
-- [SpeechRecognition](https://pypi.org/project/SpeechRecognition/) - for verifing passcode - SpeechRecognition is a python library which we used to verfiy our passcode. The passcode is to be said by the user to proceed to the OTP verification Phase.
-- [OpenCV](https://pypi.org/project/opencv-python/) - for face detection - OpenCV is a python library which we used to Detect the Face of the user using LBPH face recognition. Then it is further compared to a Sample set of authorised Users we have in /FaceDetector 
-- [Json](https://docs.python.org/3/library/json.html) - for labelling - Json is a python library which we used to label the Window for Face detection , Face identification and Sample Image set.
+- [SpeechRecognition](https://www.geeksforgeeks.org/speech-recognition-in-python-using-google-speech-api/) - for verifying passcode - SpeechRecognition is a python library which we used to verify our passcode. The passcode is to be said by the user to proceed to the OTP verification Phase.
+- [OpenCV](https://opencv.org/) - for Face Detection and Identification - OpenCV is a python library which we used to detect the face of the user using LBPH face recognition. Then it is further processed via our FaceIdentification model.
+- [pyttsx3](https://pyttsx3.readthedocs.io/en/latest/) - for Speaking Text outputs - Python Text to Speech is a python library to convert text to speech form. We have used it make it convenient for end user to interact with the application.
+- [Twilio](https://www.twilio.com/) - for Sending OTP & alert Messages - Twilio is a communications API for SMS, voice, video, WhatsApp messaging and email. We used this API to send and verify OTP by both as a web client and in the program itself.
+- [json](https://docs.python.org/3/library/json.html) - for Dataset management - JSON library is used to interact with json files. We have used it to manage our dataset labels.
 
 ## How to run the program
 1. **Download this GitHub repository**
@@ -28,25 +30,25 @@
 		```
 		pip3 install -r requirements.txt
  		```
-
 3. **Run CLI App `Sampling.py`**
-      - Get Sample image Set of Authorised Users
+      - Form dataset of your face images
                
 	        python3 sampling.py
       - *Expected Interface*
-            [the box with sampling]
-
+            <img src="images/sampling.png">
+<br><br>
 4. **Run CLI App `main.py`**
 
        python3 main.py 
       - *Expected Interface*
            [the box of main.py]
-5. **Preparing Data Set**
-     - The collected data set from `Sampling.py` is further formatted for training in `FaceIdentificationModel.py`.
-     - Here the Image gets loaded , formatted and grayscaled.
+<br><br>
+5. **Preparing Data Set** - Internally done
+     - The collected data set from `sampling.py` is further formatted for training in `FaceIdentificationModel.py`.
+     - Here the Image gets loaded, formatted and converted to grayscale.
      - Then it gets passed on to `__build_dataset` where the mathematical Dataset is made.
      
-6. **Training model on the data set collected from `Sampling.py`**
+6. **Training model on the data set collected from `Sampling.py`** - Internally done
      - In `FaceIdentificationModel.py`, the function `__train_model` trains the Prepared Data set and gets the program ready for Face Detection using LBPH (Local Binary Pattern Histogram) Face Reecognition.
 
 7. **Working**
@@ -56,8 +58,8 @@
         [ss output of identified face]
      - **Passcode Verification**
         [ss output of voice verification]
-     - **OTP Verifiction**
-        [ss of recieved otp and verified otp]
+     - **OTP Verification**
+        [ss of received otp and verified otp]
 8. **References**
     - Google 
     - Yahoo!
