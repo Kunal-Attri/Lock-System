@@ -1,6 +1,8 @@
+import json
+import os
 from os import listdir
 from os.path import isfile, join
-from typing import Optional
+from typing import Optional, Tuple, Any
 
 import cv2
 import numpy as np
@@ -11,37 +13,42 @@ from numpy import ndarray
 
 
 class FaceIdentificationModel:
-    def __init__(self, data_path: Optional[str] = None, model_path: Optional[str] = None) -> None:
+    def __init__(self, data_path: Optional[str] = None, model_path: Optional[str] = None,
+                 labels_path: Optional[str] = None) -> None:
         """
         Constructor: Initialization Script
         :param data_path: Path to dataset
         :param model_path: Path to saved model pickle file
         """
         self.__model = None
-        self.__data_path = data_path
-        self.__model_path = model_path
+        self.__data_path = data_path if data_path is not None else "FaceDetector/"
+        self.__model_path = model_path if model_path is not None else "model/trained_model.cv2"
+        self.__labels_path = labels_path if labels_path is not None else "FaceDetector/labels.json"
         self.__image_files = list()
+        self.__labels_file = dict()
         self.__training_data = list()
         self.__labels = list()
+        self.__labels_int = dict()
 
         if self.__model_path is not None:
             pass
             # self.__import_trained_model()
-        if self.__data_path is not None and self.__model is None:
+        if self.__model is None:
             self.__generate_model()
 
-    def identify(self, face: ndarray) -> bool:
+    def identify(self, face: ndarray) -> tuple[None | str, bool]:
         """
         Identify model w.r.t. trained model
         :param face: face image numpy array
-        :return: Boolean
+        :return: Name of person, Whether face identified or not
         """
         face = FaceIdentificationModel.image_to_grayscale(face)
         result = self.__model.predict(face)
+        print(result)
         confidence = int(100 * (1 - (result[1]) / 300))
         if confidence > 85:
-            return True
-        return False
+            return self.__labels_int.get(result[0]), True
+        return None, False
 
     def __import_trained_model(self) -> None:
         """
@@ -63,7 +70,7 @@ class FaceIdentificationModel:
         """
         Script for generating model from dataset
         """
-        self.__get_image_files()
+        self.__get_files()
 
         if self.__check_raw_dataset():
             self.__build_dataset()
@@ -73,26 +80,29 @@ class FaceIdentificationModel:
         self.__train_model()
         self.__export_trained_model()
 
-    def __get_image_files(self) -> None:
+    def __get_files(self) -> None:
         """
         Load Images from Dataset directory
         """
-        print("Loading Image Dataset...")
+        print("Loading Dataset...")
         self.__image_files = [__f for __f in listdir(self.__data_path)
                               if (isfile(join(self.__data_path, __f))
                                   and (__f.endswith(".jpg") or __f.endswith(".png")))]
+        if os.path.exists(self.__labels_path):
+            with open(self.__labels_path, 'r') as file:
+                self.__labels_file = json.load(file)
 
     def __check_raw_dataset(self) -> bool:
         """
         Conditional check for loaded raw dataset
-        :return: Boolean
+        :return: Whether dataset is fine or not
         """
         if len(self.__image_files) >= 50:
             return True
         else:
-            if len(self.__image_files) == 0:
+            if len(self.__image_files) == 0 or len(self.__labels_file) == 0:
                 print("Image Dataset is empty!")
-            elif len(self.__image_files) <= 50:
+            elif len(self.__image_files) <= 50 or len(self.__labels_file) <= 50:
                 print("Image Dataset is too small!")
             print("Run sampling.py to sample your own image dataset!")
             return False
@@ -102,11 +112,16 @@ class FaceIdentificationModel:
         Building the mathematical dataset to train a model
         """
         print("Setting up the Dataset...")
-        for __i, files in enumerate(self.__image_files):
+        for __i in range(len(self.__image_files)):
             __image_path = self.__data_path + self.__image_files[__i]
             __image = FaceIdentificationModel.image_path_to_grayscale(__image_path)
-            self.__training_data.append(np.asarray(__image, dtype=np.uint8))
-            self.__labels.append(__i)
+            __label = self.__labels_file.get(self.__image_files[__i][:-4], None)
+            if __label is not None:
+                self.__training_data.append(np.asarray(__image, dtype=np.uint8))
+                if __label not in self.__labels_int:
+                    self.__labels_int[__label] = len(self.__labels_int)
+                    self.__labels_int[self.__labels_int.get(__label)] = __label
+                self.__labels.append(self.__labels_int.get(__label))
         self.__training_data = np.asarray(self.__training_data)
         self.__labels = np.asarray(self.__labels, dtype=np.int32)
 
@@ -137,4 +152,3 @@ class FaceIdentificationModel:
         :return: Grayscale Image
         """
         return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-

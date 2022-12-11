@@ -1,15 +1,21 @@
+import json
+import os.path
+
 import cv2
 import uuid
 
 from FaceDetectionModel import FaceDetectionModel
 from main import Main
 
+NAME = "NoName"
 SAMPLES = 150
 DATA_PATH = "FaceDetector/"
+LABELS_PATH = "FaceDetector/labels.json"
 
 
 def main():
-    global SAMPLES
+    global NAME, SAMPLES
+    NAME = input("Name: ")
     face_detector = Sampler()
     while SAMPLES:
         if face_detector.main():
@@ -21,6 +27,15 @@ class Sampler(FaceDetectionModel):
         super().__init__()
         self.__count = SAMPLES
         self.__cap = cv2.VideoCapture(0)
+        self.__labels = dict()
+
+    def write_json(self):
+        if os.path.exists(LABELS_PATH):
+            with open(LABELS_PATH, 'r') as file:
+                file_data = json.load(file)
+            self.__labels.update(file_data)
+        with open(LABELS_PATH, "w") as file:
+            json.dump(self.__labels, file, indent=4)
 
     def main(self):
         ret, frame = self.__cap.read()
@@ -36,11 +51,14 @@ class Sampler(FaceDetectionModel):
             return Main.frame_annotate(image, text="Too many faces!", color=(255, 0, 0), position=(50, 50))
 
         face = cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
-        file_name = DATA_PATH + str(uuid.uuid4()) + ".jpg"
+        uid = str(uuid.uuid4())
+        file_name = DATA_PATH + uid + ".jpg"
         cv2.imwrite(file_name, face)
+        self.__labels[uid] = NAME
         return 1
 
     def __del__(self):
+        self.write_json()
         self.__cap.release()
         cv2.destroyAllWindows()
 

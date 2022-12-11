@@ -4,3 +4,4 @@ numpy
 pyttsx3
 SpeechRecognition
 twilio
+PyAudio
