@@ -28,6 +28,7 @@
 		```
 		pip3 install -r requirements.txt
  		```
+
 3. **Run CLI App (Sampling.py)**
         - Get Sample image Set of Authorised Users
                 ```
