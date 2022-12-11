@@ -44,7 +44,6 @@ class FaceIdentificationModel:
         """
         face = FaceIdentificationModel.image_to_grayscale(face)
         result = self.__model.predict(face)
-        print(result)
         confidence = int(100 * (1 - (result[1]) / 300))
         if confidence > 85:
             return self.__labels_int.get(result[0]), True

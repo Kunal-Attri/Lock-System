@@ -32,6 +32,7 @@ class TwilioHandler:
             return False
         verified = self.__verify_otp()
         if verified:
+            print('verified')
             return True
         elif try_flag:
             print("Sending OTP again...")
@@ -101,7 +102,7 @@ class TwilioHandler:
         except TwilioRestException:
             print('Max tries reached ... Try again after 10 minutes!')
             return False
-        if vcheck == "approved":
+        if vcheck.status == "approved":
             return True
         elif try_flag:
             print("Invalid OTP Entered, try again...")
@@ -135,6 +136,16 @@ class TwilioHandler:
             otp += str(randint(0, 9))
         self.__OTP = TwilioHandler.__get_hash(otp)
         return otp
+
+    def send_message(self, message: str) -> None:
+        """
+        Sending custom messages
+        """
+        self.__client.messages.create(
+            messaging_service_sid=self.__message_service_sid,
+            body=message,
+            to=self.__mobile_no
+        )
 
     @staticmethod
     def __input_otp(msg: str = "OTP: ") -> str:

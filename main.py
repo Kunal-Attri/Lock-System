@@ -33,7 +33,8 @@ class Main:
         self.__name = None
         self.__cap = cv2.VideoCapture(0)
         self.__face_detect = FaceDetectionModel()
-        self.__face_identify = FaceIdentificationModel(data_path=DATA_PATH, model_path=MODEL_PATH,
+        self.__face_identify = FaceIdentificationModel(data_path=DATA_PATH,
+                                                       model_path=MODEL_PATH,
                                                        labels_path=LABELS_PATH)
         self.__speech = SpeechHandler()
         self.__verifier = TwilioHandler(mobile_no=MOBILE_NO)
@@ -56,8 +57,14 @@ class Main:
 
         self.__handle_identified_face(image)
         if not self.__handle_speech_recognition():
+            self.__verifier.send_message(f"Warning: {self.__name} tried to enter with Invalid Passphrase! "
+                                         f"at {Main.__get_time()}")
             return
-        self.__handle_otp_verification()
+        if not self.__handle_otp_verification():
+            self.__verifier.send_message(f"Warning: {self.__name} tried to enter with Invalid OTP! "
+                                         f"at {Main.__get_time()}")
+            return
+        self.__handle_verified_user()
 
     def __handle_identified_face(self, img: ndarray) -> None:
         """
@@ -66,7 +73,7 @@ class Main:
         """
         Main.frame_annotate(img, f"Hello {self.__name}", (0, 255, 0))
 
-        time = datetime.now().strftime('%I:%M %p')
+        time = Main.__get_time()
         self.__speech.speak("Face verified at " + time)
 
     def __handle_speech_recognition(self, sentence: str = None, try_flag: int = 1) \
@@ -76,24 +83,35 @@ class Main:
         :param sentence: Initial sentence to be spoken
         """
         if sentence is None:
-            sentence = f"Hello {self.__name}, speak your Passcode!"
+            sentence = f"Hello {self.__name}, speak your Passphrase!"
         self.__speech.speak(sentence)
         if PASSCODE in self.__speech.listen():
             return True
         elif try_flag:
-            return self.__handle_speech_recognition("Invalid Passcode, try again.", try_flag - 1)
+            return self.__handle_speech_recognition("Invalid Passphrase, try again.", try_flag - 1)
+        print("Correct Passcode not provided within time!")
         self.__speech.speak("Correct passcode not provided within time!")
         return False
 
-    def __handle_otp_verification(self) -> None:
+    def __handle_otp_verification(self) -> bool:
         """
         Script for OTP Verification
         """
         global VERIFIED_FLAG
-        if self.__verifier.auto_verify():
-            VERIFIED_FLAG = True
+        # if self.__verifier.auto_verify():
+        #     VERIFIED_FLAG = True
+        #     return True
         if self.__verifier.verify():
             VERIFIED_FLAG = True
+            return True
+        print("Correct OTP not entered within maximum tries!")
+        self.__speech.speak("Correct OTP not entered within maximum tries!")
+        return False
+
+    def __handle_verified_user(self) -> None:
+        print(f"{self.__name} verified!")
+        self.__speech.speak(f"{self.__name} verified!")
+        self.__verifier.send_message(f"Alert: {self.__name} successfully verified!")
 
     @staticmethod
     def frame_annotate(img: ndarray, text: str, color: tuple[int, int, int], position: tuple[int, int] = (250, 450)) \
@@ -116,6 +134,10 @@ class Main:
         """
         cv2.imshow("Detector", img)
         cv2.waitKey(1)
+
+    @staticmethod
+    def __get_time():
+        return datetime.now().strftime('%I:%M %p')
 
     def __del__(self) -> None:
         """
