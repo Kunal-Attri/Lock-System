@@ -53,15 +53,20 @@
 
 7. **Working**
      - **Face Detection**
+        <br>
         <img src="images/faceDetection.png">
      - **Face Identification**
+        <br>
         <img src="images/faceIdentification.png">
      - **Passphrase Verification**
+        <br>
         <img src="images/passphrase.png">
      - **OTP Verification**
+        <br>
         <img src="images/otpVerification.png">
      - **Messages received on Mobile**
-        <img src="images/mobile_messages_1.jpg" width=200><img src="images/mobile_messages_2.jpg">
+        <br>
+        <img src="images/mobile_messages_1.jpg" width=350><img src="images/mobile_messages_2.jpg" width=350>
 8. **References**
     - Google 
     - WhatsApp sources
