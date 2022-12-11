@@ -58,5 +58,14 @@
         [ss output of voice verification]
      - **OTP Verifiction**
         [ss of recieved otp and verified otp]
-     
+8. **References**
+    - Google 
+    - Yahoo!
+    - Twitter
+    - Instagram
+    - Facebook
+    - Snapchat
+    - Signal
+    - WhatsApp
+    - Your Dog
 
