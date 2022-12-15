@@ -88,5 +88,4 @@ json files. We have used it to manage our dataset labels.
     - [Twilio SMS](https://www.twilio.com/docs/sms)
     - [Twilio OTP Verification](https://www.twilio.com/code-exchange/one-time-passcode-verification-otp)
     - [pyttsx3 Engines](https://pyttsx3.readthedocs.io/en/latest/engine.html#examples)
-    - [Your Black Dog](https://en.wikipedia.org/wiki/Black_Dog_Scotch_Whisky)
 
