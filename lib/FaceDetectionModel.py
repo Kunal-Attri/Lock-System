@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from numpy import ndarray
 
-from FaceIdentificationModel import FaceIdentificationModel
+from lib.FaceIdentificationModel import FaceIdentificationModel
 
 
 class FaceDetectionModel:
