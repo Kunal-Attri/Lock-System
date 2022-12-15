@@ -12,6 +12,9 @@ systems.
 - [SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
 - [twilio](https://pypi.org/project/twilio/)
 - [PyAudio](https://pypi.org/project/PyAudio/)
+  - Only in Windows systems
+  - If you are on a linux system, install by:
+    `sudo apt install python-pyaudio python3-pyaudio`
 
 ## What we used?
 - [SpeechRecognition](https://www.geeksforgeeks.org/speech-recognition-in-python-using-google-speech-api/) - for 
