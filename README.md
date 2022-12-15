@@ -13,7 +13,7 @@ systems.
 - [twilio](https://pypi.org/project/twilio/)
 - [PyAudio](https://pypi.org/project/PyAudio/)
   - Only in Windows systems
-  - If you are on a linux system, install by:
+  - If you are on a linux system, install by:<br>
     `sudo apt install python-pyaudio python3-pyaudio`
 
 ## What we used?
